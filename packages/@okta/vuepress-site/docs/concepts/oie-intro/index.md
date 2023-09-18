@@ -10,17 +10,17 @@ meta:
 
 Okta Identity Engine is Okta's new authentication pipeline that provides valuable new features and a more flexible approach to your auth needs. This article provides a high-level introduction.
 
-Below we explain what new features Identity Engine brings to the table, we discuss the deployment models that make use of these features and show how our documentation experience is changing to support it.
+Below explaining what new features Identity Engine brings to the table, this article discusses the deployment models that make use of these features and shows how Okta's documentation experience is changing to support it.
 
-> **Note**: If you are an admin, or are looking for product docs related to Identity Engine, see the Identity Engine [Get started page](https://help.okta.com/okta_help.htm?type=oie&id=ext-get-started-oie) over in the Okta Help Center.
+> **Note**: If you are an admin or are looking for product docs related to Identity Engine, see the Identity Engine [Get started page](https://help.okta.com/okta_help.htm?type=oie&id=ext-get-started-oie) in the Okta Help Center.
 
-## Identity Engine new features
+## Identity Engine's new features
 
 Identity Engine unlocks many new capabilities.
 
 ### App context in email templates
 
-Identity Engine makes the app context available when a user enters an authentication flow. Context variables are available in our email templates, allowing customers to dynamically customize email style and content based on the app that an email notification is triggered from.
+Identity Engine makes the app context available when a user enters an authentication flow. Context variables are available in Okta email templates, allowing customers to dynamically customize email style and content based on the app that an email notification is triggered from.
 
 See [Customize email notifications > Use app context](/docs/guides/custom-email/main/#use-app-context).
 
@@ -31,7 +31,7 @@ App intent links are used to signal intent to access an application. These links
 Example app intent link for a SAML application:
 `http://${yourOktaDomain}/app/mysamlapp_1/${appInstanceID}/sso/saml`
 
-Prior to Okta Identity Engine, these endpoints were accessible only with a session. Unauthenticated traffic was redirected to a centralized sign-in page (`/login/login.htm`) with a `fromUri` that represented the app that was originally attempted (the app intent link). This occurred before the request was assessed for rate limiting. A session was established and the request was processed. The user was then redirected to the relevant app intent link through an intermediate redirect to the generic app single-sign on endpoint (`/app/${app}/${instanceId}/${linkName}`). The app intent link endpoint validated that the user was assigned to the application, and then enforced the app sign-on policy.
+Prior to Okta Identity Engine, these endpoints were accessible only with a session. Unauthenticated traffic was redirected to a centralized sign-in page (`/login/login.htm`) with a `fromUri` that represented the app that was originally attempted (the app intent link). This occurred before the request was assessed for rate limiting. A session was established and the request was processed. The user was then redirected to the relevant app intent link through an intermediate redirect to the generic app single-sign on endpoint (`/app/${app}/${instanceId}/${linkName}`). The app intent link endpoint validated that the user was assigned to the application, and then enforced the app sign-in policy.
 
 Okta Identity Engine changed the way Okta processes these requests. Identity Engine no longer forwards requests to the centralized sign-in page (`/login/login.htm`). Instead, the app intent links location hosts the widget/sign-in experience for the app that the user is attempting to access and evaluate the Global Session Policy, authentication policy, and all other policies relevant to the sign-in experience. Since each app intent link is responsible for hosting the sign-in experience on Identity Engine, they share a common app intent link rate limit bucket/group similar to what existed for the centralized sign-in page on Classic Engine.
 
